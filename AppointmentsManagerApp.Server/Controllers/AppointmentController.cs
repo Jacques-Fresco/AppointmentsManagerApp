@@ -88,7 +88,7 @@ namespace AppointmentsManagerApp.Server.Controllers
         }
 
         // PUT: api/Appointment/5
-        [HttpPost]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAppointment(int id, Appointment appointment)
         {
             if (id != appointment.ID)
@@ -177,7 +177,7 @@ namespace AppointmentsManagerApp.Server.Controllers
                 return NotFound("No Data Found!");
             }
 
-            Appointment appointment = await _context.Appointments.FindAsync(id);
+            Appointment appointment = await _context.Appointments.FirstAsync(e => e.ID == id);
 
             if (appointment == null)
             {
