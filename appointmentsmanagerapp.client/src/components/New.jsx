@@ -32,15 +32,12 @@ export default function New(props) {
             v_ = Number(v_)
         }
 
-        console.log(name_);
-        console.log(v_);
         entry[name_] = v_
     }
 
     const postApp = () => {
-        console.log(entry)
         postAppointment(entry).then(r => {
-            console.log(r)
+            console.log("Created successfully:", r);
             props.refreshApp(Math.random() * 125 * Math.random())
         }).catch(e => console.log("Error happened at posting new app: ", e))
 
@@ -53,20 +50,20 @@ export default function New(props) {
 
             <div className="mt-15">
                 <label htmlFor="Title_n">Title</label> <br/>
-                <input type="text" className="mt-5" id="Title_n" maxLength={150} name="title" onChange={newApp} />
+                <input type="text" className="mt-5" id="Title_n" maxLength={150} name="Title" onChange={newApp} />
                 <span className="ms-10">{titleLength} / 150</span>
             </div>
 
             <div className="mt-15">
                 <label htmlFor="Description_n">Description</label> <br/>
-                <textarea id="Description_n" maxLength={300} className="mt-5" name="description" onChange={newApp} cols={102} rows={10}/> <br />
+                <textarea id="Description_n" maxLength={300} className="mt-5" name="Description" onChange={newApp} cols={102} rows={10}/> <br />
                 <span className="float-right me-10">{desLength} / 300</span>
             </div>
 
             <div className="row mt-15">
                 <div>
                     <label htmlFor="Address_n">Address</label>
-                    <input type="text" id="Address_n" name="address" onChange={newApp} maxLength={100} />
+                    <input type="text" id="Address_n" name="Address" onChange={newApp} maxLength={100} />
                     <span className="ms-10">{addrLength} / 100</span>
                 </div>
 
@@ -86,12 +83,12 @@ export default function New(props) {
             <div className="row mt-15">
                 <div>
                     <label htmlFor="Date_n">Date</label>
-                    <input type="date" id="Date_n" name="date" defaultValue={formatedDateToStr()} onChange={newApp} />
+                    <input type="date" id="Date_n" name="Date" defaultValue={formatedDateToStr()} onChange={newApp} />
                 </div>
 
                 <div className="ms-10">
                     <label htmlFor="Time_n">Time</label>
-                    <input type="time" id="Time_n" name="time" defaultValue={formatedTimeToStr()} onChange={newApp} />
+                    <input type="time" id="Time_n" name="Time" defaultValue={formatedTimeToStr()} onChange={newApp} />
                 </div>
             </div>
 

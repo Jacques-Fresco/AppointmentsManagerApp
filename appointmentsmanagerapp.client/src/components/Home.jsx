@@ -10,6 +10,7 @@ export default function Home(props) {
     const [dataList, setDataList] = useState([])
 
     const [refreshData, setRefreshData] = useState(0)
+    const [stateListener, setStateListener] = useState(0)
 
     useEffect(() => {
         getDefault().then(data=>{
@@ -98,7 +99,7 @@ export default function Home(props) {
             {
                 dataList.length === 0 ?
                     <div className="row mt-15 waiting">Loading <div className="loading">...</div></div> :
-                    dataList.map(item => <Appointment item={item} key={item.id} />)
+                    dataList.map(item => <Appointment item={item} key={item.id} stateListener={setStateListener}/>)
             }
 
             <section>
@@ -109,13 +110,13 @@ export default function Home(props) {
 
             <section>
                 <section className="modal edit-modal hidden">
-                    <Edit />
+                    <Edit stateListener={stateListener}/>
                 </section>
             </section>
             
             <section>
                 <section className="modal delete-modal hidden">
-                    <Delete />
+                    <Delete stateListener={stateListener}/>
                 </section>
             </section>
         </main>

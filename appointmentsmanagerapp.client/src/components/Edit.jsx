@@ -1,4 +1,11 @@
+import { useEffect } from "react"
+
 export default function Edit(props) {
+
+    useEffect(() => {
+        console.log("Edit component")
+    }, [props.stateListener])
+
     return (
         <div className="modal-container">
             <div className="modal-titel">Edit Appointment</div>

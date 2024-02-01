@@ -89,7 +89,7 @@ namespace AppointmentsManagerApp.Server.Controllers
 
         // PUT: api/Appointment/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAppointment(int id, Appointment appointment)
+        public async Task<IActionResult> PutAppointment(int id, [FromBody] Appointment appointment)
         {
             if (id != appointment.ID)
             {
@@ -150,7 +150,7 @@ namespace AppointmentsManagerApp.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
+        public async Task<ActionResult<Appointment>> PostAppointment([FromBody] Appointment appointment)
         {
             if (_context.Appointments == null)
             {

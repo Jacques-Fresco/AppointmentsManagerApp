@@ -5,17 +5,15 @@ export const testData = [
     { id: 4, Title: "Tile 4", Description: "Description 4", LevelOfImportance: 0, Date: "14-04-2023", Time: "17:32", Adress: "Be 8500" },
 ]
 
-const url = "api/appointment"
-
 export const entry = {
-    title: "Test title",
-    description: "Test description",
-    address: "Test address",
-    date: new Date(),
-    time: "12:30",
-    done: false,
-    deleted: false,
-    levelOfImportance: 2,
+    Title: "Test title",
+    Description: "Test description",
+    Address: "Test address",
+    Date: new Date(),
+    Time: formatedTimeToStr(),
+    Done: false,
+    Deleted: false,
+    LevelOfImportance: 2,
 }
 
 export const filter = {
@@ -28,6 +26,12 @@ export const filter = {
     SpecifiedDate: null,
     SpecifiedTime: null
 }
+
+export const activeId = {
+    id: 0
+}
+
+const url = "api/appointment"
 
 export async function getDefault() {
     const res = await fetch(url)
@@ -42,7 +46,6 @@ export async function getDefault() {
 }
 
 export async function postAppointment(newApp) {
-    console.log(newApp);
     const res = await fetch(url, {
         method: "POST",
         body: JSON.stringify(newApp),
@@ -55,6 +58,20 @@ export async function postAppointment(newApp) {
         console.log("It sucked at creating new appointment: ", res)
         notifyUser("We could not create your appoinment, please try again.")
         return {msg: res}
+    }
+
+    return await res.json()
+}
+
+export async function getDefault() {
+    const res = await fetch(url + "/" + "id", {
+        method: "DELETE"
+    })
+
+    if(!res.ok && !res.status !== 200) {
+        console.log("It sucked at getting default data: ", res)
+        notifyUser("Something went wrong, please refresh the page.")
+        return []
     }
 
     return await res.json()
